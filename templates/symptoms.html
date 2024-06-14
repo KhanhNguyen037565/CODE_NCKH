@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chọn các biểu hiện của bệnh tim mạch</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h4>Hãy đánh dấu <img src="static/images/tick.png" alt="Heart Image"> vào biểu hiện của bệnh tim mạch mà bạn gặp phải</h4>
+            <form method="POST">
+                <label for="symptom_1"><input type="checkbox" id="symptom_1" name="symptom_1"> Đau tức ngực</label><br>
+                <label for="symptom_2"><input type="checkbox" id="symptom_2" name="symptom_2"> Khó thở khi ngồi yên</label><br>
+                <label for="symptom_3"><input type="checkbox" id="symptom_3" name="symptom_3"> Sưng phù chân, mặt, mí mắt</label><br>
+                <label for="symptom_4"><input type="checkbox" id="symptom_4" name="symptom_4"> Mệt mỏi khi ngồi yên</label><br>
+                <label for="symptom_5"><input type="checkbox" id="symptom_5" name="symptom_5"> Ho kinh niên</label><br>
+                <label for="symptom_6"><input type="checkbox" id="symptom_6" name="symptom_6"> Chán ăn, buồn nôn</label><br>
+                <label for="symptom_7"><input type="checkbox" id="symptom_7" name="symptom_7"> Thường xuyên tiểu đêm</label><br>
+                <label for="symptom_8"><input type="checkbox" id="symptom_8" name="symptom_8"> Nhịp tim đập nhanh, mạnh hoặc không đều</label><br>
+                <label for="symptom_9"><input type="checkbox" id="symptom_9" name="symptom_9"> Thở nhanh và toát mồ hôi</label><br>
+                <label for="symptom_10"><input type="checkbox" id="symptom_10" name="symptom_10"> Chóng mặt, ngất xỉu hoặc hoa mắt</label><br>
+                <label for="symptom_11"><input type="checkbox" id="symptom_11" name="symptom_11"> Mất ngủ, khó thở khi ngủ, tăng cân</label><br><br>
+                
+                <input type="submit" value="Xác nhận">
+                <p>Chọn các biểu hiện mà bạn gặp phải sau đó ấn xác nhận!</p>
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/tickchon.png" alt="Heart Image">
+        </div>
+    </div>
+    
+   
+    
+</body>
+</html>

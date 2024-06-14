@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin đã nhập</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Thông tin đã nhập</h1>
+        <ul>
+            <li><strong>Age:</strong> {{ data.get('age', '') }}</li>
+            <li><strong>Sex:</strong> {{ data.get('sex', '') }}</li>
+            <li><strong>Cp:</strong> {{ data.get('cp', '') }}</li>
+            <li><strong>Restecg:</strong> {{ data.get('restecg', '') }}</li>
+            <li><strong>Chol:</strong> {{ data.get('chol', '') }}</li>
+            <li><strong>Fbs:</strong> {{ data.get('fbs', '') }}</li>
+            <li><strong>Thalach:</strong> {{ data.get('thalach', '') }}</li>
+            <li><strong>Exang:</strong> {{ data.get('exang', '') }}</li>
+            <li><strong>Oldpeak:</strong> {{ data.get('oldpeak', '') }}</li>
+            <li><strong>Slope:</strong> {{ data.get('slope', '') }}</li>
+            <li><strong>Ca:</strong> {{ data.get('ca', '') }}</li>
+            <li><strong>Thal:</strong> {{ data.get('thal', '') }}</li>
+        </ul>
+    </div>
+</body>
+</html>

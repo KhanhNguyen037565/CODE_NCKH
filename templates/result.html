@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tờ Đơn Khám Bệnh</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #000; /* Định dạng viền */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1, h2, h3 {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        /* Đặt thuộc tính word-wrap cho các ô chứa nội dung lý do */
+        .reason {
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phiếu chẩn đoán nội khoa tim mạch</h1>
+        <table>
+            <tr>
+                <th colspan="2">Thông tin bệnh nhân</th>
+            </tr>
+            <tr>
+                <td><strong>Mã bệnh nhân:</strong></td>
+                <td>{{ patient_id }}</td>
+            </tr>
+            <tr>
+                <td><strong>Họ và tên:</strong></td>
+                <td>{{ benh_nhan_obj.ho_ten }}</td>
+            </tr>
+            <tr>
+                <td><strong>Tuổi:</strong></td>
+                <td>{{ new_patient_data.age }}</td>
+            </tr>
+            <tr>
+                <td><strong>Giới tính:</strong></td>
+                <td>
+                    {% if new_patient_data.sex == '0' %}
+                        Nữ
+                    {% elif new_patient_data.sex == '1' %}
+                        Nam
+                    {% else %}
+                        Giới tính không xác định
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Quê quán:</strong></td>
+                <td>{{ benh_nhan_obj.que_quan }}</td>
+            </tr>
+        </table>
+
+        <h2>Chẩn đoán sơ bộ</h2>
+        {% if prediction == '0' %}
+            Bệnh nhân không mắc bệnh tim mạch
+        {% elif prediction == '1' %}
+            Bệnh nhân mắc bệnh tim mạch
+        {% else %}
+            Kết quả không xác định
+        {% endif %}
+        <br><br>
+
+
+        <table>
+            
+            {% if reason_detail %}
+            <tr><th colspan="2">Chẩn đoán xác định</th></tr>
+                <tr>
+                    <!-- Áp dụng lớp 'reason' cho ô chứa nội dung lý do -->
+                    <td class="reason">{{ reason_detail }}</td>
+                </tr>
+            {% endif %}
+        </table>
+        
+
+        {% if detail_treatment %}
+        <h2>Tư vấn cụ thể</h2>
+            <ul>
+                {% for item in detail_treatment %}
+                    <li>{{ item }}</li><br>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {% if treatment %}
+        <h2>Điều trị cụ thể</h2>
+            <ul>
+                {% for item in treatment %}
+                    <li>{{ item }}</li><br>
+                {% endfor %}
+                <h4>Hẹn tái khám sau 4 Tuần</h4>
+            </ul>
+        {% endif %}
+
+        {% if prophylactic_treatment %}
+        <br><h2>Tư vấn dự phòng</h2>
+            <ul>
+                {% for item in prophylactic_treatment %}
+                    <li>{{ item }}</li><br>
+                {% endfor %}
+
+            </ul>
+        {% endif %}
+                
+    </div>
+</body>
+</html>

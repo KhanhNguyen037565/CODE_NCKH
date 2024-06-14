@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Visualization</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-zoom.v2.min.js"></script>
+    <style>
+        * {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .relationship {
+            stroke: #999;
+            stroke-width: 2px;
+        }
+        .relationship-label {
+            font-size: 10px;
+            fill: #555;
+            text-anchor: middle;
+        }
+        .node {
+            cursor: pointer;
+            pointer-events: all;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 10px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var nodesAndLinks = {{ nodes_and_links | tojson | safe }};
+        var nodes = nodesAndLinks.map(link => link.source).concat(nodesAndLinks.map(link => link.target));
+        var links = generateLinks(nodes);
+
+        var labelColors = d3.scaleOrdinal(d3.schemeCategory10);
+
+        var svg = d3.select("body").append("svg").attr("width", "100%").attr("height", "100%"),
+            g = svg.append("g");
+
+        var zoom = d3.zoom().on("zoom", function (event) {
+            g.attr("transform", event.transform);
+        });
+
+        svg.call(zoom);
+
+        var relationship = g.selectAll(".relationship")
+            .data(links)
+            .enter().append("line")
+            .attr("class", "relationship");
+
+        var relationshipLabels = g.selectAll(".relationship-label")
+            .data(links)
+            .enter().append("text")
+            .text(d => d.label)  // Display relationship label
+            .attr("class", "relationship-label");
+
+        var node = g.selectAll(".node")
+            .data(nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", d => `translate(${d.x},${d.y})`)
+            .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended))
+            .on("click", handleClick)
+            .on("mouseout", handleMouseOut)
+            .on("mouseover", handleMouseOver);
+
+        node.append("circle")
+            .attr("r", 15)
+            .attr("fill", d => labelColors(d.labels[0]))
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("id", d => "node-" + d.id);
+
+        node.append("text")
+            .text(d => (d.properties && d.properties.no) ? d.properties.no : "")
+            .attr("dy", ".35em")
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff");
+
+        var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+
+        function generateLinks(nodes) {
+            const groupedNodes = d3.group(nodes, d => d.properties.no);
+
+            const links = [];
+            groupedNodes.forEach(group => {
+                for (let i = 1; i < group.length; i++) {
+                    links.push({ source: group[i - 1], target: group[i], label: "HAS_TARGET" });
+                }
+            });
+
+            return links;
+        }
+
+        function handleClick(event, d) {
+            console.log("Clicked Node:", d);
+
+            // Check if the clicked node has data and properties
+            if (d && d.properties) {
+                console.log(JSON.stringify(d.properties));
+
+                // Display tooltip only for the clicked node
+                tooltip.transition().duration(200).style("opacity", .9);
+                tooltip.html("Label: " + (d.labels && d.labels.length > 0 ? d.labels[0] : "N/A") + "<br/>" + "Properties: " + JSON.stringify(d.properties))
+                    .style("left", (event.pageX) + "px")
+                    .style("top", (event.pageY - 80) + "px");
+            }
+        }
+
+        function handleMouseOver(d, i) {
+            d3.select(this).select("circle").transition()
+                .duration(200)
+                .attr("r", 20);
+        }
+
+        function handleMouseOut(d, i) {
+            d3.select(this).select("circle").transition()
+                .duration(200)
+                .attr("r", 15);
+
+            tooltip.transition().duration(500).style("opacity", 0);
+        }
+
+        function ticked() {
+            relationship
+                .attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            relationshipLabels
+                .attr("x", d => (d.source.x + d.target.x) / 2)
+                .attr("y", d => (d.source.y + d.target.y) / 2);
+                
+            node
+                .attr("transform", function(d) {
+                    if (typeof d.x !== 'undefined' && typeof d.y !== 'undefined') {
+                        return "translate(" + d.x + "," + d.y + ")";
+                    }
+                });
+        }
+
+        var simulation = d3.forceSimulation(nodes)
+            .force("charge", d3.forceManyBody().strength(-100))
+            .force("link", d3.forceLink(links).id(function(d) { return d.id; }))
+            .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
+            .on("tick", ticked);
+
+        // Drag start event handler
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        // Drag event handler
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        // Drag end event handler
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    </script>
+</body>
+</html>

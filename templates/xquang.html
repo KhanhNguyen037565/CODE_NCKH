@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xquang tim phổi (Chest X-ray)</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.875em;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let isValid = true;
+   
+            let cp = document.getElementById("cp").value;
+            let restecg = document.getElementById("restecg").value;
+   
+            clearErrors();
+   
+            if (cp !== "1" && cp !== "0" && cp != "2" && cp != "3") {
+                showError("cpError", "Vui lòng chọn loại đau ngực hợp lệ");
+                isValid = false;
+            }
+            if (home === "") {
+                showError("restecgError", "Quê quán không được để trống");
+                isValid = false;
+            }
+   
+            return isValid;
+        }
+   
+        function showError(elementId, errorMessage) {
+            let errorElement = document.getElementById(elementId);
+            if (errorElement) {
+                errorElement.innerText = errorMessage;
+            }
+        }
+   
+        function clearErrors() {
+            let errorElements = document.getElementsByClassName("error");
+            for (let element of errorElements) {
+                element.innerText = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>X - quang tim phổi (Chest X-ray)</h1>
+            <form method="POST" action="/Xquang"> 
+                <label for="cp">Cp (Loại đau ngực):</label>
+                <select id="cp" name="cp" class="form-select" required>
+                    <option value="0">Đau ngực điển hình</option>
+                    <option value="1">Đau ngực không điển hình</option>
+                    <option value="2">Đau không liên quan đến cơ tim</option>
+                    <option value="3">Không có triệu chứng đau ngực</option>
+                </select>
+                <label for="restecg">Restecg (Kết quả điện tâm đồ lúc nghỉ):</label>
+                <select id="restecg" name="restecg" class="form-select" required>
+                    <option value="0">Bình thường</option>
+                    <option value="1">Có biến đổi ST-T không bình thường (đảo ngược T hoặc tăng hoặc giảm ST > 0,05 mV)</option>
+                    <option value="2">Có thể hoặc chắc chắn phì đại thất trái theo tiêu chí của Estes</option>
+                <input style="margin-top: 10px;" type="submit" value="Tiếp theo">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/xq.jpg" alt="Heart Image">
+        </div>
+    </div>
+</body>
+</html>

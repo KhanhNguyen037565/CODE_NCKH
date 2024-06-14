@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chẩn đoán bệnh tim mạch</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>Chẩn đoán bệnh tim mạch</h1>
+            <p>Chúng tôi nhận thấy bạn có dấu hiệu của bệnh tim mạch, để kết quả chẩn đoán chính xác, bạn vui lòng thực hiện các xét nghiệm sau:</p>
+            <p>
+                1. X - quang tim phổi<br>
+                2. Xét nghiệm huyết học<br>
+                3. Xét nghiệm sinh hóa máu<br>
+                4. Siêu âm tim<br>
+                5. Điện tâm đồ<br>
+                Bằng cách thực hiện các xét nghiệm này, chúng tôi sẽ có thông tin đầy đủ để đưa ra kết luận và đề xuất biện pháp điều trị phù hợp nhất cho bạn.
+            </p>
+            
+        
+            <form action="/thongbao" method="POST">
+                <input type="submit" value="Đồng ý">
+            </form>
+            
+        </div>
+        <div class="right-section">
+            <img src="static/logo.png" alt="Heart Image">
+        </div>
+    </div>
+   
+    
+</body>
+</html>

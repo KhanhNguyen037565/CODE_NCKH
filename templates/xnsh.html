@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XNSH</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>Xét nghiệm sinh hóa máu</h1>
+            <form method="POST" action="/xnsh"> 
+                <label for="fbs">FBS (Đường huyết nhanh) > 120 mg/dl:</label>
+                <select id="fbs" name="fbs" class="form-select" required>
+                    <option value="0">Sai</option>
+                    <option value="1">Đúng</option>
+                <input style="margin-top: 10px;" type="submit" value="Tiếp theo">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/xnsh.png" alt="Heart Image">
+        </div>
+    </div>
+</body>
+</html>

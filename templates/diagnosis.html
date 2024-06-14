@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuẩn đoán bệnh tim mạch</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>Thông số tổng hợp</h1>
+            <form action="/diagnosis" method="POST">
+                <ul>
+                    <li><strong>Age:</strong> {{ new_patient_data.get('age', '') }}</li>
+                    <li><strong>Sex:</strong> {{ new_patient_data.get('sex', '') }}</li>
+                    <li><strong>Cp:</strong> {{ new_patient_data.get('cp', '') }}</li>
+                    <li><strong>Trestbps:</strong> {{ new_patient_data.get('trestbps', '') }}</li>
+                    <li><strong>Chol:</strong> {{ new_patient_data.get('chol', '') }}</li>
+                    <li><strong>Fbs:</strong> {{ new_patient_data.get('fbs', '') }}</li>
+                    <li><strong>Restecg:</strong> {{ new_patient_data.get('restecg', '') }}</li>
+                    <li><strong>Thalach:</strong> {{ new_patient_data.get('thalach', '') }}</li>
+                    <li><strong>Exang:</strong> {{ new_patient_data.get('exang', '') }}</li>
+                    <li><strong>Oldpeak:</strong> {{ new_patient_data.get('oldpeak', '') }}</li>
+                    <li><strong>Slope:</strong> {{ new_patient_data.get('slope', '') }}</li>
+                    <li><strong>Ca:</strong> {{ new_patient_data.get('ca', '') }}</li>
+                    <li><strong>Thal:</strong> {{ new_patient_data.get('thal', '') }}</li>
+                </ul>
+                <input type="submit" value="Chẩn đoán">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/th.jpg" alt="Heart Image">
+        </div>
+    </div>
+</body>
+</html>

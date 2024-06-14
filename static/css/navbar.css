@@ -1,0 +1,48 @@
+
+/* Định dạng logo */
+.navbar-brand img {
+    max-height: 50px; /* Điều chỉnh chiều cao tối đa của logo */
+}
+/* Định dạng tên bệnh viện */
+.hospital-name {
+    margin-left: 10px; /* Khoảng cách giữa logo và tên bệnh viện */
+    font-size: 20px;
+    font-weight: bold;
+}
+/* Định dạng các mục trong navbar */
+.nav-item {
+    margin-right: 10px; /* Khoảng cách giữa các mục */
+}
+/* Định dạng mục chọn mục */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Định dạng mục dropdown */
+.dropdown-menu {
+    margin-top: 5px;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown menu */
+}
+
+/* Định dạng mục dropdown khi hiển thị */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Màu nền cho dropdown menu */
+.dropdown-menu {
+    background-color: #ffffff; /* Màu trắng */
+}
+
+/* Màu chữ cho các mục trong dropdown */
+.dropdown-menu .dropdown-item {
+    color: #333333; /* Màu xám đậm */
+    padding: 10px 20px; /* Khoảng cách giữa các mục */
+}
+
+/* Màu chữ khi hover trong dropdown */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa; /* Màu xám nhạt */
+    color: #4caf50; /* Màu xanh */
+}

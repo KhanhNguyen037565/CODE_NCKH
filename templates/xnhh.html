@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XNHh</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>Xét nghiệm huyết học (Blood Test)</h1>
+            <form method="POST" action="/xnhh"> 
+                <label for="chol">Chol (Cholesterol huyết thanh):</label>
+                <input style="margin-left: 20px;" type="number" id="chol" name="chol" required min="80" max = "240"> 
+                <label for="trestbps">Trestbps (Huyết áp lúc nghỉ - đo bằng mmHg khi nhập viện ):</label>
+                <input style="margin-left: 20px;" type="number" id="trestbps" name="trestbps" required min="60" max = "150">
+
+                <input style="margin-top: 10px;" type="submit" value="Tiếp theo">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/xnhh.jpg" alt="Heart Image">
+        </div>
+    </div>
+</body>
+</html>

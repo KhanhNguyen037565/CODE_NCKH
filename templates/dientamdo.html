@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dientamdo</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>Điện tâm đồ</h1>
+            <form method="POST" action="/dientamdo"> 
+                <label for="exang">Exang (Đau ngực do tập thể dục gây ra):</label>
+                <select id="exang" name="exang" class="form-select" required>
+                    <option value="0">Không</option>
+                    <option value="1">Có</option>
+                </select>
+                <div style="margin-top: 20px;" class="form-group">
+                    <label for="oldpeak" style="display: inline-block; width: 300px;">Oldpeak (ST giảm do tập thể dục so với lúc nghỉ ngơi):</label>
+                    <input type="number" name="oldpeak" required step="any" min="0" max="10" style="display: inline-block; width: calc(100% - 320px);">
+                </div>
+                
+                <label for="slope">Slope (Độ dốc của đoạn ST khi tập thể dục):</label>
+                <select id="slope" name="slope" class="form-select" required>
+                    <option value="0">Tăng dần</option>
+                    <option value="1">Phẳng</option>
+                    <option value="2">Giảm dần</option>
+                </select>
+                <label style="margin-top: 20px;" for="ca">Ca (Số mạch chính được nhuộm màu bằng fluoroscopy):</label>
+                <input style="margin-left: 10px;" type="number" name="ca" required min = "0" max = "4">
+                <label for="thal">Thal (Thallium - Các biến gen tham gia vào trạng thái của tim khi căng thẳng):</label>
+                <select id="thal" name="thal" class="form-select" required>
+                    <option value="0">Bình thường</option>
+                    <option value="1">Khuyết tật cố định</option>
+                    <option value="2">Khuyết tật có thể đảo ngược</option>
+                </select>
+                <input style="margin-top: 10px;" type="submit" value="Tiếp theo">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/dtd.jpg" alt="Heart Image">
+        </div>
+    </div>
+</body>
+</html>

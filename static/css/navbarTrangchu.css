@@ -1,0 +1,48 @@
+/* MENU LINKS */
+.navbar-collapse {
+    text-align: center; /* Căn giữa nội dung của navbar */
+}
+
+.navbar-collapse ul.navbar-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Loại bỏ dấu chấm liên kết của danh sách */
+}
+
+.navbar-collapse ul.navbar-nav li {
+    display: inline-block; /* Hiển thị các mục menu cạnh nhau */
+    margin: 0 10px; /* Khoảng cách giữa các mục menu */
+}
+
+.navbar-collapse ul.navbar-nav li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333; /* Màu chữ của menu links */
+    transition: 0.3s; /* Hiệu ứng chuyển đổi */
+}
+
+.navbar-collapse ul.navbar-nav li a:hover {
+    background-color: #f8f9fa; /* Màu nền khi di chuột vào */
+    color: #555; /* Màu chữ khi di chuột vào */
+}
+
+/* Dropdown */
+.navbar-collapse ul.navbar-nav li.nav-item.dropdown {
+    position: relative; /* Tạo vị trí tương đối cho dropdown */
+}
+
+.navbar-collapse ul.navbar-nav li.nav-item.dropdown .dropdown-menu {
+    position: absolute; /* Đặt vị trí tuyệt đối cho dropdown */
+    top: 100%; /* Hiển thị dropdown phía dưới */
+    left: 0;
+    background-color: #fff; /* Màu nền của dropdown */
+    padding: 10px 0;
+    min-width: 200px; /* Độ rộng tối thiểu của dropdown */
+    z-index: 1000; /* Độ ưu tiên lớn hơn của dropdown */
+    display: none; /* Ẩn dropdown mặc định */
+}
+
+.navbar-collapse ul.navbar-nav li.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Hiển thị dropdown khi di chuột vào */
+}

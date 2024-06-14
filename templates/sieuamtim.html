@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sieuamtim</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="left-section">
+            <h1>Siêu âm tim</h1>
+            <form method="POST" action="/sieuamtim"> 
+                <label for="thalach">Thalach (Nhịp tim tối đa đạt được):</label>
+                <input style="margin-top: 5px;" type="number" name="thalach" required min ="40" max = "220">
+                <input style="margin-top: 10px;" type="submit" value="Tiếp theo">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="static/images/sieuamtim.png" alt="Heart Image">
+        </div>
+    </div>
+</body>
+</html>
